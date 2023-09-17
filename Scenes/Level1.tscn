@@ -16,6 +16,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_djxcq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef6b0"]
+size = Vector2(13, 15)
 
 [node name="Level1" type="Node2D"]
 
@@ -33,3 +34,5 @@ shape = SubResource("RectangleShape2D_ef6b0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("2_bl67d")
+region_enabled = true
+region_rect = Rect2(13, 0, 13, 16)
