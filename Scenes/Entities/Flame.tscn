@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d20j26o1eohk4"]
+
+[ext_resource type="Script" path="res://Scripts/Flame.cs" id="1_3gn0w"]
+[ext_resource type="Texture2D" uid="uid://bs0l5m1e3higl" path="res://Sprites/spr_flame.png" id="1_m44xh"]
+
+[node name="Flame" type="Node2D"]
+script = ExtResource("1_3gn0w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m44xh")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

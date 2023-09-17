@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7g7u8kaxqcna"]
+[gd_scene load_steps=5 format=3 uid="uid://b7g7u8kaxqcna"]
 
 [ext_resource type="Texture2D" uid="uid://65ojjn7ihmpt" path="res://Sprites/spr_block.png" id="1_ral6m"]
-[ext_resource type="Texture2D" uid="uid://o2a2n7tnx6h7" path="res://Sprites/spr_hero.png" id="2_bl67d"]
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="2_jnyh2"]
+[ext_resource type="PackedScene" uid="uid://ctm6twcbv3xr" path="res://Scenes/Entities/Player.tscn" id="2_or38h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_djxcq"]
 texture = ExtResource("1_ral6m")
@@ -15,9 +14,6 @@ texture = ExtResource("1_ral6m")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_djxcq")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ef6b0"]
-size = Vector2(13, 15)
-
 [node name="Level1" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -25,14 +21,6 @@ tile_set = SubResource("TileSet_2ihwu")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 131075, 0, 0, 65539, 0, 0, 3, 0, 0, 2, 0, 0, 1, 0, 0, 262144, 0, 0, 393216, 0, 0, 327680, 0, 0, 262147, 0, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 393219, 0, 0, 393218, 0, 0, 393217, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 196615, 0, 0, 131079, 0, 0, 65543, 0, 0, 7, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 262152, 0, 0, 262153, 0, 0, 262155, 0, 0, 262154, 0, 0, 262156, 0, 0, 196620, 0, 0, 131084, 0, 0, 65548, 0, 0, 12, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 196623, 0, 0, 196624, 0, 0, 262160, 0, 0, 131088, 0, 0, 65552, 0, 0, 16, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 65555, 0, 0, 131091, 0, 0, 196627, 0, 0, 196626, 0, 0, 196625, 0, 0, 262163, 0, 0, 327699, 0, 0, 393235, 0, 0, 393234, 0, 0, 393233, 0, 0, 393232, 0, 0, 393231, 0, 0, 327695, 0, 0, 851968, 0, 0, 851969, 0, 0, 917504, 0, 0, 983040, 0, 0, 1048576, 0, 0, 1114112, 0, 0, 1114113, 0, 0, 1114114, 0, 0, 1114115, 0, 0, 1048579, 0, 0, 1048578, 0, 0, 1179650, 0, 0, 1179648, 0, 0, 1245184, 0, 0, 1245185, 0, 0, 1245186, 0, 0, 1245187, 0, 0, 1245188, 0, 0, 1245189, 0, 0, 1245190, 0, 0, 1179654, 0, 0, 1179655, 0, 0, 1245191, 0, 0, 1114119, 0, 0, 1048583, 0, 0, 983047, 0, 0, 1114120, 0, 0, 1114121, 0, 0, 1114122, 0, 0, 1114123, 0, 0, 1114124, 0, 0, 1048588, 0, 0, 983052, 0, 0, 1179660, 0, 0, 1245196, 0, 0, 1245192, 0, 0, 1245193, 0, 0, 1245194, 0, 0, 1245195, 0, 0, 1179661, 0, 0, 1245197, 0, 0, 1245198, 0, 0, 1245199, 0, 0, 1245200, 0, 0, 1245201, 0, 0, 1179665, 0, 0, 1114129, 0, 0, 1048593, 0, 0, 1048592, 0, 0, 1114128, 0, 0, 1114130, 0, 0, 1114131, 0, 0, 1245202, 0, 0, 1245203, 0, 0, 1179667, 0, 0, 1048595, 0, 0, 983059, 0, 0, 917523, 0, 0, 851987, 0, 0, 851986, 0, 0)
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("2_or38h")]
 position = Vector2(160, 160)
-script = ExtResource("2_jnyh2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_ef6b0")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture = ExtResource("2_bl67d")
-region_enabled = true
-region_rect = Rect2(13, 0, 13, 16)
+Speed = 80
