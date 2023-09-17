@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://beqfobiajwtlo"]
+
+[ext_resource type="PackedScene" uid="uid://eiajfxtakcix" path="res://Scenes/World.tscn" id="1_s3tf7"]
+[ext_resource type="PackedScene" uid="uid://b7g7u8kaxqcna" path="res://Scenes/Level1.tscn" id="2_3cmsj"]
+[ext_resource type="PackedScene" uid="uid://cd7s4kvqmfmoj" path="res://Scenes/GUI.tscn" id="3_08o77"]
+
+[node name="Main" type="Node"]
+
+[node name="World" parent="." instance=ExtResource("1_s3tf7")]
+
+[node name="Level1" parent="World" instance=ExtResource("2_3cmsj")]
+
+[node name="GUI" parent="." instance=ExtResource("3_08o77")]
