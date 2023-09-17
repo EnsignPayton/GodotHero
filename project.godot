@@ -18,3 +18,7 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="GodotHero"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
