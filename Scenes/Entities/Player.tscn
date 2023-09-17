@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://o2a2n7tnx6h7" path="res://Sprites/spr_hero.png" id="2_i4gax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef6b0"]
-size = Vector2(13, 15)
+size = Vector2(12, 15.9)
 
 [node name="Player" type="CharacterBody2D"]
+safe_margin = 0.001
 script = ExtResource("1_3negu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -15,7 +16,7 @@ shape = SubResource("RectangleShape2D_ef6b0")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_i4gax")
 region_enabled = true
-region_rect = Rect2(13, 0, 13, 16)
+region_rect = Rect2(0, 0, 12, 16)
 
 [node name="FlameTimer" type="Timer" parent="."]
 wait_time = 0.25

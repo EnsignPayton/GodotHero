@@ -50,14 +50,6 @@ public partial class Player : CharacterBody2D
 
 	private void FaceDirection()
 	{
-		var spriteLeft = _sprite.RegionRect.Position.X == 0;
-		if (spriteLeft && !_facingLeft)
-		{
-			_sprite.RegionRect = _sprite.RegionRect with { Position = new Vector2(13, 0) };
-		}
-		else if (!spriteLeft && _facingLeft)
-		{
-			_sprite.RegionRect = _sprite.RegionRect with { Position = new Vector2(0, 0) };
-		}
+		_sprite.FlipH = !_facingLeft;
 	}
 }
