@@ -9,22 +9,24 @@ public partial class Room : Node2D
 		_camera = GetNode<Camera2D>("Camera2D");
 		var area2d = GetNode<Area2D>("Area2D");
 
-		area2d.BodyEntered += Area2dOnBodyEntered;
-		area2d.BodyExited += Area2dOnBodyExited;
+		area2d.BodyEntered += OnBodyEntered;
+		area2d.BodyExited += OnBodyExited;
 	}
 
-	private void Area2dOnBodyEntered(Node2D body)
+	private void OnBodyEntered(Node2D body)
 	{
 		if (body is Player)
 		{
+			GD.Print("Player Entered Room");
 			_camera.Enabled = true;
 		}
 	}
 
-	private void Area2dOnBodyExited(Node2D body)
+	private void OnBodyExited(Node2D body)
 	{
 		if (body is Player)
 		{
+			GD.Print("Player Exited Room");
 			_camera.Enabled = false;
 		}
 	}
