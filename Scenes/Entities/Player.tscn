@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef6b0"]
 size = Vector2(12, 15.9)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 safe_margin = 0.001
 script = ExtResource("1_3negu")
 

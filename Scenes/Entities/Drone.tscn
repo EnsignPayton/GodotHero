@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtx44e031g4k1"]
+
+[ext_resource type="Texture2D" uid="uid://cv4sgt5itjjxx" path="res://Sprites/spr_drone.png" id="1_7r48x"]
+[ext_resource type="Script" path="res://Scripts/Drone.cs" id="1_c2o8f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1sh0"]
+size = Vector2(16, 16)
+
+[node name="Drone" type="Node2D"]
+script = ExtResource("1_c2o8f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7r48x")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_e1sh0")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
