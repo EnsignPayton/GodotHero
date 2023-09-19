@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cruh3tgw4ccgq"]
+
+[ext_resource type="Script" path="res://Scripts/Room.cs" id="1_ju84t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_df7pr"]
+size = Vector2(320, 320)
+
+[node name="Room" type="Node2D"]
+position = Vector2(160, 160)
+script = ExtResource("1_ju84t")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_df7pr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
