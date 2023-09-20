@@ -68,11 +68,11 @@ public partial class Player : CharacterBody2D
 
 	private void CreateShot()
 	{
-		var instance = _shotScene.Instantiate<GodotHero.Scenes.Entities.Shot>();
+		var instance = _shotScene.Instantiate<Shot>();
 		instance.Transform = Transform;
 		instance.FacingLeft = _facingLeft;
 		AddSibling(instance);
 	}
 
-	private int ShotCount() => GetParent().GetChildren().OfType<GodotHero.Scenes.Entities.Shot>().Count();
+	private int ShotCount() => GetParent().GetChildren().OfType<Shot>().Count();
 }
