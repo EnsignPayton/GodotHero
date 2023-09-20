@@ -1,3 +1,5 @@
+namespace GodotHero.Scenes;
+
 public partial class Room : Node2D
 {
 	private Camera2D _camera = default!;
@@ -13,7 +15,7 @@ public partial class Room : Node2D
 
 	private void OnBodyEntered(Node2D body)
 	{
-		if (body is Player)
+		if (body is Entities.Player)
 		{
 			GD.Print("Player Entered Room");
 			_camera.Enabled = true;
@@ -22,7 +24,7 @@ public partial class Room : Node2D
 
 	private void OnBodyExited(Node2D body)
 	{
-		if (body is Player)
+		if (body is Entities.Player)
 		{
 			GD.Print("Player Exited Room");
 			_camera.Enabled = false;

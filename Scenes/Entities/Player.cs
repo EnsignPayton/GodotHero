@@ -1,3 +1,5 @@
+namespace GodotHero.Scenes.Entities;
+
 public partial class Player : CharacterBody2D
 {
 	private Sprite2D _sprite = default!;
@@ -68,11 +70,11 @@ public partial class Player : CharacterBody2D
 
 	private void CreateShot()
 	{
-		var instance = _shotScene.Instantiate<Shot>();
+		var instance = _shotScene.Instantiate<GodotHero.Scenes.Entities.Shot>();
 		instance.Transform = Transform;
 		instance.FacingLeft = _facingLeft;
 		AddSibling(instance);
 	}
 
-	private int ShotCount() => GetParent().GetChildren().OfType<Shot>().Count();
+	private int ShotCount() => GetParent().GetChildren().OfType<GodotHero.Scenes.Entities.Shot>().Count();
 }

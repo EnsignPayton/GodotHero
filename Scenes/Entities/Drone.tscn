@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dtx44e031g4k1"]
 
 [ext_resource type="Texture2D" uid="uid://cv4sgt5itjjxx" path="res://Sprites/spr_drone.png" id="1_7r48x"]
-[ext_resource type="Script" path="res://Scripts/Drone.cs" id="1_c2o8f"]
+[ext_resource type="Script" path="res://Scenes/Entities/Drone.cs" id="1_suxty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1sh0"]
 size = Vector2(16, 16)
 
 [node name="Drone" type="Node2D"]
-script = ExtResource("1_c2o8f")
+script = ExtResource("1_suxty")
 Speed = 32
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

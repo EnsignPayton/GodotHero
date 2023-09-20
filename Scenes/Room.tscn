@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cruh3tgw4ccgq"]
 
-[ext_resource type="Script" path="res://Scripts/Room.cs" id="1_ju84t"]
+[ext_resource type="Script" path="res://Scenes/Room.cs" id="1_a5uht"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_df7pr"]
 size = Vector2(320, 320)
 
 [node name="Room" type="Node2D"]
 position = Vector2(160, 160)
-script = ExtResource("1_ju84t")
+script = ExtResource("1_a5uht")
 
 [node name="Area2D" type="Area2D" parent="."]
 

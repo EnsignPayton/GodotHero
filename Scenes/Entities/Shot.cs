@@ -1,3 +1,5 @@
+namespace GodotHero.Scenes.Entities;
+
 public partial class Shot : Node2D
 {
 	[Export] public bool FacingLeft { get; set; }
@@ -31,7 +33,7 @@ public partial class Shot : Node2D
 
 	private void OnAreaExited(Area2D area)
 	{
-		if (area.GetParent() is Room)
+		if (area.GetParent() is GodotHero.Scenes.Room)
 		{
 			QueueFree();
 		}

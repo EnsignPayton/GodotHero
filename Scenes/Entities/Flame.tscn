@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://d20j26o1eohk4"]
 
-[ext_resource type="Script" path="res://Scripts/Flame.cs" id="1_3gn0w"]
 [ext_resource type="Texture2D" uid="uid://bs0l5m1e3higl" path="res://Sprites/spr_flame.png" id="1_m44xh"]
+[ext_resource type="Script" path="res://Scenes/Entities/Flame.cs" id="1_vpeyd"]
 
 [node name="Flame" type="Node2D"]
-script = ExtResource("1_3gn0w")
+script = ExtResource("1_vpeyd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_m44xh")
