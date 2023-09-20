@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GodotHero.Scenes.Entities;
 
 namespace GodotHero.Scenes;
