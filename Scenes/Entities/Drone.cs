@@ -2,7 +2,7 @@ namespace GodotHero.Scenes.Entities;
 
 public partial class Drone : Node2D
 {
-	private GodotHero.Scenes.Entities.Player _player = default!;
+	private Player _player = default!;
 	private DroneState _state = DroneState.Blinking;
 	private Vector2 _direction = Vector2.Zero;
 	private int _currentHealth;
@@ -17,7 +17,7 @@ public partial class Drone : Node2D
 		var timer = GetNode<Timer>("Timer");
 		timer.Timeout += OnTimeout;
 
-		_player = GetTree().GetNodesInGroup("Player").OfType<GodotHero.Scenes.Entities.Player>().First();
+		_player = GetTree().GetNodesInGroup("Player").OfType<Player>().First();
 	}
 
 	private void OnTimeout()
@@ -25,11 +25,11 @@ public partial class Drone : Node2D
 		if (_state is DroneState.Blinking)
 		{
 			_state = DroneState.Chasing;
-			_direction = (_player.Position - Position).Normalized();
+			_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
 		}
 		else if (_state is DroneState.Chasing)
 		{
-			_direction = (_player.Position - Position).Normalized();
+			_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
 		}
 	}
 
