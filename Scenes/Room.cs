@@ -6,15 +6,15 @@ namespace GodotHero.Scenes;
 public partial class Room : Node2D
 {
 	private readonly List<Transform2D> _droneTransforms = new();
+	private readonly PackedScene _droneScene = GD.Load<PackedScene>("res://Scenes/Entities/Drone.tscn");
 	private Camera2D _camera = default!;
-	private PackedScene _droneScene = default!;
 
 	public override void _Ready()
 	{
 		_camera = GetNode<Camera2D>("Camera2D");
-		_droneScene = GD.Load<PackedScene>("res://Scenes/Entities/Drone.tscn");
 
 		InitializeEnemies();
+		FreeAllEnemies();
 		InitializeAreaCallbacks();
 	}
 

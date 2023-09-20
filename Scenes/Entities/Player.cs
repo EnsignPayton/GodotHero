@@ -2,9 +2,9 @@ namespace GodotHero.Scenes.Entities;
 
 public partial class Player : CharacterBody2D
 {
+	private readonly PackedScene _flameScene = GD.Load<PackedScene>("res://Scenes/Entities/Flame.tscn");
+	private readonly PackedScene _shotScene = GD.Load<PackedScene>("res://Scenes/Entities/Shot.tscn");
 	private Sprite2D _sprite = default!;
-	private PackedScene _flameScene = default!;
-	private PackedScene _shotScene = default!;
 	private bool _facingLeft;
 
 	[Export] public int MaximumShots { get; set; } = 5;
@@ -13,8 +13,6 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		_sprite = GetNode<Sprite2D>("Sprite2D");
-		_flameScene = GD.Load<PackedScene>("res://Scenes/Entities/Flame.tscn");
-		_shotScene = GD.Load<PackedScene>("res://Scenes/Entities/Shot.tscn");
 
 		var flameTimer = GetNode<Timer>("FlameTimer");
 		flameTimer.Timeout += OnFlameTimeout;
