@@ -1,6 +1,6 @@
 namespace GodotHero.Scenes.Entities;
 
-public partial class Drone : Node2D
+public partial class Drone : CharacterBody2D
 {
 	private Player _player = default!;
 	private DroneState _state = DroneState.Blinking;
@@ -18,21 +18,6 @@ public partial class Drone : Node2D
 		timer.Timeout += OnTimeout;
 
 		_player = GetTree().GetNodesInGroup("Player").OfType<Player>().First();
-
-		var area = GetNode<Area2D>("Area2D");
-		area.BodyEntered += OnBodyEntered;
-	}
-
-	private void OnBodyEntered(Node2D body)
-	{
-		GD.Print(body.Name);
-		if (body is TileMap)
-		{
-			var apos = GlobalPosition;
-			var bpos = body.GlobalPosition;
-			var dir = (apos - bpos).Normalized();
-			_direction = (-dir);
-		}
 	}
 
 	private void OnTimeout()
@@ -50,7 +35,11 @@ public partial class Drone : Node2D
 
 	public override void _Process(double delta)
 	{
-		Translate((float)delta * Speed * _direction);
+		var collision = MoveAndCollide((float)delta * Speed * _direction);
+		if (collision is not null)
+		{
+			_direction = _direction.Bounce(collision.GetNormal());
+		}
 	}
 
 	public void Hit()

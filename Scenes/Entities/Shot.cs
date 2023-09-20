@@ -8,7 +8,6 @@ public partial class Shot : Node2D
 	public override void _Ready()
 	{
 		var area = GetNode<Area2D>("Area2D");
-		area.AreaEntered += OnAreaEntered;
 		area.AreaExited += OnAreaExited;
 		area.BodyEntered += OnBodyEntered;
 	}
@@ -20,11 +19,7 @@ public partial class Shot : Node2D
 			// Hit a wall, destroy
 			QueueFree();
 		}
-	}
-
-	private void OnAreaEntered(Area2D area)
-	{
-		if (area.GetParent() is Drone d)
+		else if (body is Drone d)
 		{
 			d.Hit();
 			QueueFree();
@@ -33,7 +28,7 @@ public partial class Shot : Node2D
 
 	private void OnAreaExited(Area2D area)
 	{
-		if (area.GetParent() is GodotHero.Scenes.Room)
+		if (area.GetParent() is Room)
 		{
 			QueueFree();
 		}
