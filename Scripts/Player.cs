@@ -1,6 +1,3 @@
-using System.Linq;
-using Godot;
-
 public partial class Player : CharacterBody2D
 {
 	private Sprite2D _sprite = default!;

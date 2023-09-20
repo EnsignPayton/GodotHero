@@ -1,5 +1,3 @@
-using Godot;
-
 public partial class Room : Node2D
 {
 	private Camera2D _camera = default!;

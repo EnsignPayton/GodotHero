@@ -8,6 +8,7 @@ size = Vector2(16, 16)
 
 [node name="Drone" type="Node2D"]
 script = ExtResource("1_c2o8f")
+Speed = 32
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7r48x")
