@@ -52,8 +52,11 @@ position = Vector2(-160, 160)
 
 [node name="Room8" parent="Rooms" instance=ExtResource("3_gvmt5")]
 
-[node name="Drone" parent="Rooms/Room8" instance=ExtResource("4_1y0l1")]
-position = Vector2(113, 80)
-
 [node name="Room9" parent="Rooms" instance=ExtResource("3_gvmt5")]
 position = Vector2(480, 160)
+
+[node name="Drone" parent="Rooms/Room9" instance=ExtResource("4_1y0l1")]
+position = Vector2(96, -75)
+
+[node name="Drone2" parent="Rooms/Room9" instance=ExtResource("4_1y0l1")]
+position = Vector2(6, 100)
