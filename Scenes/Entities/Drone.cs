@@ -18,6 +18,21 @@ public partial class Drone : Node2D
 		timer.Timeout += OnTimeout;
 
 		_player = GetTree().GetNodesInGroup("Player").OfType<Player>().First();
+
+		var area = GetNode<Area2D>("Area2D");
+		area.BodyEntered += OnBodyEntered;
+	}
+
+	private void OnBodyEntered(Node2D body)
+	{
+		GD.Print(body.Name);
+		if (body is TileMap)
+		{
+			var apos = GlobalPosition;
+			var bpos = body.GlobalPosition;
+			var dir = (apos - bpos).Normalized();
+			_direction = (-dir);
+		}
 	}
 
 	private void OnTimeout()
