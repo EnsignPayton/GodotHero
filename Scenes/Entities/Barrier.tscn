@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://1dcnaovriu3q"]
+
+[ext_resource type="Texture2D" uid="uid://btps7h1svysin" path="res://Sprites/spr_barrier.png" id="1_25cr0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_strbv"]
+atlas = ExtResource("1_25cr0")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mquw8"]
+atlas = ExtResource("1_25cr0")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tlfqj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_strbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mquw8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Barrier" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tlfqj")
+autoplay = "default"

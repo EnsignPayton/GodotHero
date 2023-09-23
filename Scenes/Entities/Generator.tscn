@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://pu8f1jfne8wb"]
+[gd_scene load_steps=12 format=3 uid="uid://pu8f1jfne8wb"]
 
+[ext_resource type="Script" path="res://Scenes/Entities/Generator.cs" id="1_ki2a7"]
 [ext_resource type="Texture2D" uid="uid://bbvp7hwhyvxd0" path="res://Sprites/spr_gen.png" id="1_p4b7j"]
 [ext_resource type="Texture2D" uid="uid://dkb2gv23d27gt" path="res://Sprites/spr_gencore.png" id="2_3fybb"]
 [ext_resource type="Script" path="res://Scenes/Entities/GeneratorCore.cs" id="2_aqs6q"]
@@ -34,7 +35,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r61qi"]
 size = Vector2(24, 24)
 
-[node name="Generator" type="Node2D"]
+[node name="Generator" type="Node2D" node_paths=PackedStringArray("Core")]
+script = ExtResource("1_ki2a7")
+Core = NodePath("GeneratorCore")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_p4b7j")
@@ -67,6 +70,7 @@ shape = SubResource("RectangleShape2D_r61qi")
 [node name="DeathSprite" type="AnimatedSprite2D" parent="GeneratorCore"]
 visible = false
 sprite_frames = ExtResource("5_reels")
+animation = &"BigExplo"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
