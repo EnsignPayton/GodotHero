@@ -2,10 +2,11 @@ namespace GodotHero.Scenes;
 
 public partial class Main : Node
 {
+    [Export] public Timer FPSTimer { get; set; } = default!;
+
     public override void _Ready()
     {
-        var timer = GetNode<Timer>("FPSTimer");
-        timer.Timeout += OnTimeout;
+        FPSTimer.Timeout += OnTimeout;
     }
 
     private static void OnTimeout()

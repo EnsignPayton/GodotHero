@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctm6twcbv3xr"]
+[gd_scene load_steps=14 format=3 uid="uid://ctm6twcbv3xr"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.cs" id="1_w7l47"]
 [ext_resource type="Texture2D" uid="uid://o2a2n7tnx6h7" path="res://Sprites/spr_hero.png" id="2_i4gax"]
+[ext_resource type="PackedScene" uid="uid://d20j26o1eohk4" path="res://Scenes/Entities/Flame.tscn" id="2_y1cc0"]
 [ext_resource type="Texture2D" uid="uid://bo7v01trn5f7o" path="res://Sprites/spr_bigexplo.png" id="3_3r8m7"]
+[ext_resource type="PackedScene" uid="uid://wnkfd3t5n82e" path="res://Scenes/Entities/Shot.tscn" id="3_iv23o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef6b0"]
 size = Vector2(12, 15.9)
@@ -57,9 +59,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "FlameTimer") groups=["Player"]]
 safe_margin = 0.001
 script = ExtResource("1_w7l47")
+Sprite = NodePath("Sprite2D")
+FlameTimer = NodePath("FlameTimer")
+FlameScene = ExtResource("2_y1cc0")
+ShotScene = ExtResource("3_iv23o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ef6b0")
@@ -73,6 +79,6 @@ region_rect = Rect2(0, 0, 12, 16)
 wait_time = 0.25
 autostart = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="DeathSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_ggop7")

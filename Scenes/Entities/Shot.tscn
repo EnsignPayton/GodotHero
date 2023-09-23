@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqsu7"]
 size = Vector2(6, 6)
 
-[node name="Shot" type="Node2D"]
+[node name="Shot" type="Node2D" node_paths=PackedStringArray("Area")]
 script = ExtResource("1_dtcc2")
+Area = NodePath("Area2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_hqw45")

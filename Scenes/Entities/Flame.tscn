@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bs0l5m1e3higl" path="res://Sprites/spr_flame.png" id="1_m44xh"]
 [ext_resource type="Script" path="res://Scenes/Entities/Flame.cs" id="1_vpeyd"]
 
-[node name="Flame" type="Node2D"]
+[node name="Flame" type="Node2D" node_paths=PackedStringArray("Timer")]
 script = ExtResource("1_vpeyd")
+Timer = NodePath("Timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_m44xh")

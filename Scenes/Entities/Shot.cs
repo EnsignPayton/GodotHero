@@ -5,11 +5,12 @@ public partial class Shot : Node2D
     [Export] public bool FacingLeft { get; set; }
     [Export] public int Speed { get; set; } = 128;
 
+    [Export] public Area2D Area { get; set; } = default!;
+
     public override void _Ready()
     {
-        var area = GetNode<Area2D>("Area2D");
-        area.AreaExited += OnAreaExited;
-        area.BodyEntered += OnBodyEntered;
+        Area.AreaExited += OnAreaExited;
+        Area.BodyEntered += OnBodyEntered;
     }
 
     private void OnBodyEntered(Node2D body)

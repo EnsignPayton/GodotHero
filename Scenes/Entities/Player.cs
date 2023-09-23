@@ -2,20 +2,19 @@ namespace GodotHero.Scenes.Entities;
 
 public partial class Player : CharacterBody2D
 {
-    private readonly PackedScene _flameScene = GD.Load<PackedScene>("res://Scenes/Entities/Flame.tscn");
-    private readonly PackedScene _shotScene = GD.Load<PackedScene>("res://Scenes/Entities/Shot.tscn");
-    private Sprite2D _sprite = default!;
     private bool _facingLeft;
 
     [Export] public int MaximumShots { get; set; } = 5;
     [Export] public int Speed { get; set; } = 128;
 
+    [Export] public Sprite2D Sprite { get; set; } = default!;
+    [Export] public Timer FlameTimer { get; set; } = default!;
+    [Export] public PackedScene FlameScene { get; set; } = default!;
+    [Export] public PackedScene ShotScene { get; set; } = default!;
+
     public override void _Ready()
     {
-        _sprite = GetNode<Sprite2D>("Sprite2D");
-
-        var flameTimer = GetNode<Timer>("FlameTimer");
-        flameTimer.Timeout += OnFlameTimeout;
+        FlameTimer.Timeout += OnFlameTimeout;
     }
 
     private void OnFlameTimeout()
@@ -23,7 +22,7 @@ public partial class Player : CharacterBody2D
         // Only add flame when moving
         if (Velocity != Vector2.Zero)
         {
-            var instance = _flameScene.Instantiate<Node2D>();
+            var instance = FlameScene.Instantiate<Node2D>();
             instance.Transform = Transform;
             AddSibling(instance);
         }
@@ -56,19 +55,19 @@ public partial class Player : CharacterBody2D
 
     private void FaceDirection()
     {
-        _sprite.FlipH = !_facingLeft;
+        Sprite.FlipH = !_facingLeft;
     }
 
     private void CreateFlame()
     {
-        var instance = _flameScene.Instantiate<Flame>();
+        var instance = FlameScene.Instantiate<Flame>();
         instance.Transform = Transform;
         AddSibling(instance);
     }
 
     private void CreateShot()
     {
-        var instance = _shotScene.Instantiate<Shot>();
+        var instance = ShotScene.Instantiate<Shot>();
         instance.Transform = Transform;
         instance.FacingLeft = _facingLeft;
         AddSibling(instance);

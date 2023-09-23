@@ -1,14 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cruh3tgw4ccgq"]
+[gd_scene load_steps=6 format=3 uid="uid://cruh3tgw4ccgq"]
 
 [ext_resource type="Script" path="res://Scenes/Room.cs" id="1_a5uht"]
+[ext_resource type="PackedScene" uid="uid://dtx44e031g4k1" path="res://Scenes/Entities/Drone.tscn" id="2_ebmsv"]
 [ext_resource type="Texture2D" uid="uid://rd26xb6vgsv8" path="res://Sprites/spr_room.png" id="2_t8i1k"]
+[ext_resource type="PackedScene" uid="uid://o8qlx84m3d7l" path="res://Scenes/Entities/Reaver.tscn" id="3_5icer"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_df7pr"]
 size = Vector2(320, 320)
 
-[node name="Room" type="Node2D"]
+[node name="Room" type="Node2D" node_paths=PackedStringArray("Camera", "Area")]
 position = Vector2(160, 160)
 script = ExtResource("1_a5uht")
+Camera = NodePath("Camera2D")
+Area = NodePath("Area2D")
+DroneScene = ExtResource("2_ebmsv")
+ReaverScene = ExtResource("3_5icer")
 
 [node name="Area2D" type="Area2D" parent="."]
 

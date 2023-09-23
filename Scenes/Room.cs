@@ -6,14 +6,14 @@ public partial class Room : Node2D
 {
     private readonly List<Transform2D> _droneTransforms = new();
     private readonly List<Transform2D> _reaverTransforms = new();
-    private readonly PackedScene _droneScene = GD.Load<PackedScene>("res://Scenes/Entities/Drone.tscn");
-    private readonly PackedScene _reaverScene = GD.Load<PackedScene>("res://Scenes/Entities/Reaver.tscn");
-    private Camera2D _camera = default!;
+
+    [Export] public Camera2D Camera { get; set; } = default!;
+    [Export] public Area2D Area { get; set; } = default!;
+    [Export] public PackedScene DroneScene { get; set; } = default!;
+    [Export] public PackedScene ReaverScene { get; set; } = default!;
 
     public override void _Ready()
     {
-        _camera = GetNode<Camera2D>("Camera2D");
-
         InitializeEnemies();
         FreeAllEnemies();
         InitializeAreaCallbacks();
@@ -34,10 +34,8 @@ public partial class Room : Node2D
 
     private void InitializeAreaCallbacks()
     {
-        var area2d = GetNode<Area2D>("Area2D");
-
-        area2d.BodyEntered += OnBodyEntered;
-        area2d.BodyExited += OnBodyExited;
+        Area.BodyEntered += OnBodyEntered;
+        Area.BodyExited += OnBodyExited;
     }
 
     private void OnBodyEntered(Node2D body)
@@ -60,14 +58,14 @@ public partial class Room : Node2D
 
     private void Activate()
     {
-        _camera.Enabled = true;
+        Camera.Enabled = true;
         FreeAllEnemies();
         InstantiateEnemies();
     }
 
     private void Deactivate()
     {
-        _camera.Enabled = false;
+        Camera.Enabled = false;
         FreeAllEnemies();
     }
 
@@ -88,14 +86,14 @@ public partial class Room : Node2D
     {
         foreach (var transform in _droneTransforms)
         {
-            var instance = _droneScene.Instantiate<Drone>();
+            var instance = DroneScene.Instantiate<Drone>();
             instance.Transform = transform;
             AddChild(instance);
         }
 
         foreach (var transform in _reaverTransforms)
         {
-            var instance = _reaverScene.Instantiate<Reaver>();
+            var instance = ReaverScene.Instantiate<Reaver>();
             instance.Transform = transform;
             AddChild(instance);
         }
