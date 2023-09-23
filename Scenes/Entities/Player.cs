@@ -4,6 +4,8 @@ public partial class Player : CharacterBody2D
 {
     private bool _facingLeft;
 
+    public static Player Instance { get; private set; } = default!;
+
     [Export] public int MaximumShots { get; set; } = 5;
     [Export] public int Speed { get; set; } = 128;
 
@@ -14,6 +16,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        Instance = this;
         FlameTimer.Timeout += OnFlameTimeout;
     }
 

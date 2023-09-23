@@ -2,7 +2,6 @@ namespace GodotHero.Scenes.Entities;
 
 public partial class Reaver : CharacterBody2D, IEnemy
 {
-    private Player _player = default!;
     private EnemyState _state = EnemyState.Blinking;
     private Vector2 _direction = Vector2.Zero;
     private int _currentHealth;
@@ -20,7 +19,6 @@ public partial class Reaver : CharacterBody2D, IEnemy
     public override void _Ready()
     {
         _currentHealth = MaxHealth;
-        _player = (Player)GetTree().GetFirstNodeInGroup("Player");
 
         BlinkTimer.Timeout += BlinkTimerOnTimeout;
         TargetTimer.Timeout += TargetTimerOnTimeout;
@@ -29,7 +27,7 @@ public partial class Reaver : CharacterBody2D, IEnemy
     private void BlinkTimerOnTimeout()
     {
         _state = EnemyState.Chasing;
-        _direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+        _direction = (Player.Instance.GlobalPosition - GlobalPosition).Normalized();
 
         BlinkSprite.Stop();
         BlinkSprite.Visible = false;
@@ -40,7 +38,7 @@ public partial class Reaver : CharacterBody2D, IEnemy
 
     private void TargetTimerOnTimeout()
     {
-        _direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+        _direction = (Player.Instance.GlobalPosition - GlobalPosition).Normalized();
         FaceDirection();
     }
 

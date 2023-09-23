@@ -42,7 +42,6 @@ public partial class Room : Node2D
     {
         if (body is Player)
         {
-            GD.Print("Player Entered Room");
             Activate();
         }
     }
@@ -51,7 +50,6 @@ public partial class Room : Node2D
     {
         if (body is Player)
         {
-            GD.Print("Player Exited Room");
             Deactivate();
         }
     }

@@ -2,7 +2,6 @@ namespace GodotHero.Scenes.Entities;
 
 public partial class Drone : CharacterBody2D, IEnemy
 {
-    private Player _player = default!;
     private EnemyState _state = EnemyState.Blinking;
     private Vector2 _direction = Vector2.Zero;
     private int _currentHealth;
@@ -19,7 +18,6 @@ public partial class Drone : CharacterBody2D, IEnemy
     public override void _Ready()
     {
         _currentHealth = MaxHealth;
-        _player = (Player)GetTree().GetFirstNodeInGroup("Player");
 
         BlinkTimer.Timeout += BlinkTimerOnTimeout;
         TargetTimer.Timeout += TargetTimerOnTimeout;
@@ -28,7 +26,7 @@ public partial class Drone : CharacterBody2D, IEnemy
     private void BlinkTimerOnTimeout()
     {
         _state = EnemyState.Chasing;
-        _direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+        _direction = (Player.Instance.GlobalPosition - GlobalPosition).Normalized();
 
         MainSprite.Stop();
         TargetTimer.Start();
@@ -36,7 +34,7 @@ public partial class Drone : CharacterBody2D, IEnemy
 
     private void TargetTimerOnTimeout()
     {
-        _direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+        _direction = (Player.Instance.GlobalPosition - GlobalPosition).Normalized();
     }
 
     public override void _PhysicsProcess(double delta)
