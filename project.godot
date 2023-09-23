@@ -27,6 +27,11 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="GodotHero"
 
+[filesystem]
+
+import/blender/enabled=false
+import/fbx/enabled=false
+
 [input]
 
 move_left={
