@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://o8qlx84m3d7l"]
+[gd_scene load_steps=8 format=3 uid="uid://o8qlx84m3d7l"]
 
 [ext_resource type="Texture2D" uid="uid://dmdqvllkvbk22" path="res://Sprites/spr_reaver.png" id="1_4y30g"]
 [ext_resource type="Script" path="res://Scenes/Entities/Reaver.cs" id="1_8grqg"]
-[ext_resource type="Texture2D" uid="uid://bo7v01trn5f7o" path="res://Sprites/spr_bigexplo.png" id="1_eeb1q"]
+[ext_resource type="SpriteFrames" uid="uid://q07n0nt0wyjr" path="res://Animations/BigExplo.tres" id="3_cmukk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwbwn"]
 size = Vector2(16, 16)
@@ -29,56 +29,6 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8t7a3"]
-atlas = ExtResource("1_eeb1q")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m7k26"]
-atlas = ExtResource("1_eeb1q")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_otl52"]
-atlas = ExtResource("1_eeb1q")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oj5l7"]
-atlas = ExtResource("1_eeb1q")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iyhw6"]
-atlas = ExtResource("1_eeb1q")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_morkr"]
-atlas = ExtResource("1_eeb1q")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qapa5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8t7a3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m7k26")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_otl52")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oj5l7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iyhw6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_morkr")
-}],
-"loop": false,
-"name": &"default",
-"speed": 10.0
-}]
-
 [node name="Reaver" type="CharacterBody2D" node_paths=PackedStringArray("BlinkSprite", "MainSprite", "DeathSprite", "BlinkTimer", "TargetTimer", "CollisionShape")]
 collision_layer = 4
 script = ExtResource("1_8grqg")
@@ -103,7 +53,7 @@ region_rect = Rect2(32, 0, 16, 16)
 
 [node name="DeathSprite" type="AnimatedSprite2D" parent="."]
 visible = false
-sprite_frames = SubResource("SpriteFrames_qapa5")
+sprite_frames = ExtResource("3_cmukk")
 
 [node name="BlinkTimer" type="Timer" parent="."]
 one_shot = true

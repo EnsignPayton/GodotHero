@@ -1,10 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://pu8f1jfne8wb"]
+[gd_scene load_steps=11 format=3 uid="uid://pu8f1jfne8wb"]
 
 [ext_resource type="Texture2D" uid="uid://bbvp7hwhyvxd0" path="res://Sprites/spr_gen.png" id="1_p4b7j"]
 [ext_resource type="Texture2D" uid="uid://dkb2gv23d27gt" path="res://Sprites/spr_gencore.png" id="2_3fybb"]
 [ext_resource type="Script" path="res://Scenes/Entities/GeneratorCore.cs" id="2_aqs6q"]
 [ext_resource type="PackedScene" uid="uid://wnkfd3t5n82e" path="res://Scenes/Entities/Shot.tscn" id="3_pkoxk"]
-[ext_resource type="Texture2D" uid="uid://bo7v01trn5f7o" path="res://Sprites/spr_bigexplo.png" id="4_ypr58"]
+[ext_resource type="SpriteFrames" uid="uid://q07n0nt0wyjr" path="res://Animations/BigExplo.tres" id="5_reels"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63q35"]
 size = Vector2(40, 58)
@@ -33,56 +33,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r61qi"]
 size = Vector2(24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8kehy"]
-atlas = ExtResource("4_ypr58")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_esd61"]
-atlas = ExtResource("4_ypr58")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_blscm"]
-atlas = ExtResource("4_ypr58")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pfacd"]
-atlas = ExtResource("4_ypr58")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fde2v"]
-atlas = ExtResource("4_ypr58")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qeu0p"]
-atlas = ExtResource("4_ypr58")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vbo6h"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8kehy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_esd61")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_blscm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pfacd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fde2v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qeu0p")
-}],
-"loop": false,
-"name": &"default",
-"speed": 10.0
-}]
 
 [node name="Generator" type="Node2D"]
 
@@ -116,7 +66,7 @@ shape = SubResource("RectangleShape2D_r61qi")
 
 [node name="DeathSprite" type="AnimatedSprite2D" parent="GeneratorCore"]
 visible = false
-sprite_frames = SubResource("SpriteFrames_vbo6h")
+sprite_frames = ExtResource("5_reels")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

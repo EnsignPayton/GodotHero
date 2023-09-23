@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://wnkfd3t5n82e"]
+[gd_scene load_steps=5 format=3 uid="uid://wnkfd3t5n82e"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Shot.cs" id="1_dtcc2"]
 [ext_resource type="Texture2D" uid="uid://0imkx87biub" path="res://Sprites/spr_shot.png" id="1_hqw45"]
+[ext_resource type="SpriteFrames" uid="uid://jn5d1yayjof6" path="res://Animations/Explo.tres" id="3_lyhy6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqsu7"]
 size = Vector2(6, 6)
 
-[node name="Shot" type="Node2D" node_paths=PackedStringArray("Area")]
+[node name="Shot" type="Node2D" node_paths=PackedStringArray("Area", "CollisionShape", "MainSprite", "ExplodeSprite")]
 script = ExtResource("1_dtcc2")
 Area = NodePath("Area2D")
+CollisionShape = NodePath("Area2D/CollisionShape2D")
+MainSprite = NodePath("Sprite2D")
+ExplodeSprite = NodePath("HitSprite")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_hqw45")
@@ -19,3 +23,8 @@ collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_gqsu7")
+
+[node name="HitSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = ExtResource("3_lyhy6")
+animation = &"Explo"

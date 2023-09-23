@@ -6,6 +6,9 @@ public partial class Shot : Node2D
     [Export] public Vector2 Velocity { get; set; }
 
     [Export] public Area2D Area { get; set; } = default!;
+    [Export] public CollisionShape2D CollisionShape { get; set; } = default!;
+    [Export] public Sprite2D MainSprite { get; set; } = default!;
+    [Export] public AnimatedSprite2D ExplodeSprite { get; set; } = default!;
 
     public override void _Ready()
     {
@@ -18,14 +21,15 @@ public partial class Shot : Node2D
         if (body is TileMap)
         {
             // Hit a wall, destroy
-            QueueFree();
+            Explode();
+            // QueueFree();
         }
         else if (!IsEnemy)
         {
             if (body is IEnemy enemy)
             {
                 enemy.Hit();
-                QueueFree();
+                Explode();
             }
             else if (body.GetParent().Name == "Generator")
             {
@@ -40,6 +44,22 @@ public partial class Shot : Node2D
                 // TODO: Damage
             }
         }
+    }
+
+    private void Explode()
+    {
+        // Stop movement and collider, start explode
+        Velocity = Vector2.Zero;
+        CollisionShape.SetDeferred("disabled", true);
+        MainSprite.Visible = false;
+        ExplodeSprite.Visible = true;
+        ExplodeSprite.Play();
+        ExplodeSprite.AnimationFinished += OnAnimationFinished;
+    }
+
+    private void OnAnimationFinished()
+    {
+        QueueFree();
     }
 
     private void OnAreaExited(Area2D area)
