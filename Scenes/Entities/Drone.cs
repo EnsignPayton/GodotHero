@@ -1,3 +1,5 @@
+using System;
+
 namespace GodotHero.Scenes.Entities;
 
 public partial class Drone : CharacterBody2D
@@ -23,7 +25,7 @@ public partial class Drone : CharacterBody2D
 		_collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
 		_sprite = GetNode<Sprite2D>("Sprite2D");
 		_deathSprite = GetNode<AnimatedSprite2D>("DeathSprite");
-		_player = GetTree().GetNodesInGroup("Player").OfType<Player>().First();
+		_player = (Player)GetTree().GetFirstNodeInGroup("Player");
 	}
 
 	private void OnTimeout()

@@ -13,3 +13,6 @@ script = ExtResource("1_g4gxr")
 [node name="Level1" parent="World" instance=ExtResource("2_3cmsj")]
 
 [node name="GUI" parent="." instance=ExtResource("3_08o77")]
+
+[node name="FPSTimer" type="Timer" parent="."]
+autostart = true
