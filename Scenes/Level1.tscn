@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7g7u8kaxqcna"]
+[gd_scene load_steps=9 format=3 uid="uid://b7g7u8kaxqcna"]
 
 [ext_resource type="Texture2D" uid="uid://65ojjn7ihmpt" path="res://Sprites/spr_block.png" id="1_ral6m"]
 [ext_resource type="PackedScene" uid="uid://ctm6twcbv3xr" path="res://Scenes/Entities/Player.tscn" id="2_or38h"]
 [ext_resource type="PackedScene" uid="uid://cruh3tgw4ccgq" path="res://Scenes/Room.tscn" id="3_gvmt5"]
 [ext_resource type="PackedScene" uid="uid://dtx44e031g4k1" path="res://Scenes/Entities/Drone.tscn" id="4_1y0l1"]
+[ext_resource type="PackedScene" uid="uid://pu8f1jfne8wb" path="res://Scenes/Entities/Generator.tscn" id="4_8q3lm"]
 [ext_resource type="PackedScene" uid="uid://o8qlx84m3d7l" path="res://Scenes/Entities/Reaver.tscn" id="5_dquh8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_djxcq"]
@@ -33,6 +34,9 @@ Speed = 80
 
 [node name="Room1" parent="Rooms" instance=ExtResource("3_gvmt5")]
 position = Vector2(-160, -480)
+
+[node name="Generator" parent="Rooms/Room1" instance=ExtResource("4_8q3lm")]
+position = Vector2(-104, -48)
 
 [node name="Room2" parent="Rooms" instance=ExtResource("3_gvmt5")]
 position = Vector2(160, -480)

@@ -25,6 +25,11 @@ public partial class Shot : Node2D
             enemy.Hit();
             QueueFree();
         }
+        else if (body.GetParent().Name == "Generator")
+        {
+            // TODO: Do this in a better way. Check which collision mask we hit?
+            QueueFree();
+        }
     }
 
     private void OnAreaExited(Area2D area)
