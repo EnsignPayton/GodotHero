@@ -2,8 +2,8 @@ namespace GodotHero.Scenes.Entities;
 
 public partial class Shot : Node2D
 {
-    [Export] public bool FacingLeft { get; set; }
-    [Export] public int Speed { get; set; } = 128;
+    [Export] public bool IsEnemy { get; set; }
+    [Export] public Vector2 Velocity { get; set; }
 
     [Export] public Area2D Area { get; set; } = default!;
 
@@ -20,15 +20,25 @@ public partial class Shot : Node2D
             // Hit a wall, destroy
             QueueFree();
         }
-        else if (body is IEnemy enemy)
+        else if (!IsEnemy)
         {
-            enemy.Hit();
-            QueueFree();
+            if (body is IEnemy enemy)
+            {
+                enemy.Hit();
+                QueueFree();
+            }
+            else if (body.GetParent().Name == "Generator")
+            {
+                // TODO: Do this in a better way. Check which collision mask we hit?
+                QueueFree();
+            }
         }
-        else if (body.GetParent().Name == "Generator")
+        else
         {
-            // TODO: Do this in a better way. Check which collision mask we hit?
-            QueueFree();
+            if (body is Player)
+            {
+                // TODO: Damage
+            }
         }
     }
 
@@ -42,7 +52,6 @@ public partial class Shot : Node2D
 
     public override void _Process(double delta)
     {
-        var unit = FacingLeft ? Vector2.Left : Vector2.Right;
-        Translate((float)delta * Speed * unit);
+        Translate((float)delta * Velocity);
     }
 }

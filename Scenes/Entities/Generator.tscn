@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://pu8f1jfne8wb"]
+[gd_scene load_steps=18 format=3 uid="uid://pu8f1jfne8wb"]
 
 [ext_resource type="Texture2D" uid="uid://bbvp7hwhyvxd0" path="res://Sprites/spr_gen.png" id="1_p4b7j"]
 [ext_resource type="Texture2D" uid="uid://dkb2gv23d27gt" path="res://Sprites/spr_gencore.png" id="2_3fybb"]
 [ext_resource type="Script" path="res://Scenes/Entities/GeneratorCore.cs" id="2_aqs6q"]
+[ext_resource type="PackedScene" uid="uid://wnkfd3t5n82e" path="res://Scenes/Entities/Shot.tscn" id="3_pkoxk"]
 [ext_resource type="Texture2D" uid="uid://bo7v01trn5f7o" path="res://Sprites/spr_bigexplo.png" id="4_ypr58"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63q35"]
@@ -98,11 +99,13 @@ shape = SubResource("RectangleShape2D_63q35")
 position = Vector2(0, 35)
 shape = SubResource("RectangleShape2D_63q35")
 
-[node name="GeneratorCore" type="CharacterBody2D" parent="." node_paths=PackedStringArray("MainSprite", "DeathSprite")]
+[node name="GeneratorCore" type="CharacterBody2D" parent="." node_paths=PackedStringArray("MainSprite", "DeathSprite", "ShotTimer")]
 collision_layer = 4
 script = ExtResource("2_aqs6q")
 MainSprite = NodePath("MainSprite")
 DeathSprite = NodePath("DeathSprite")
+ShotTimer = NodePath("../Timer")
+ShotScene = ExtResource("3_pkoxk")
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="GeneratorCore"]
 sprite_frames = SubResource("SpriteFrames_3etk0")
@@ -114,3 +117,7 @@ shape = SubResource("RectangleShape2D_r61qi")
 [node name="DeathSprite" type="AnimatedSprite2D" parent="GeneratorCore"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_vbo6h")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true

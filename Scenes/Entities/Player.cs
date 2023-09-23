@@ -7,7 +7,8 @@ public partial class Player : CharacterBody2D
     public static Player Instance { get; private set; } = default!;
 
     [Export] public int MaximumShots { get; set; } = 5;
-    [Export] public int Speed { get; set; } = 128;
+    [Export] public int ShotSpeed { get; set; } = 128;
+    [Export] public int MoveSpeed { get; set; } = 128;
 
     [Export] public Sprite2D Sprite { get; set; } = default!;
     [Export] public Timer FlameTimer { get; set; } = default!;
@@ -42,7 +43,7 @@ public partial class Player : CharacterBody2D
     {
         // Movement
         var inputVector = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-        Velocity = inputVector * Speed;
+        Velocity = inputVector * MoveSpeed;
 
         // Facing
         var fireLeft = Input.IsActionJustPressed("fire_left");
@@ -72,7 +73,7 @@ public partial class Player : CharacterBody2D
     {
         var instance = ShotScene.Instantiate<Shot>();
         instance.Transform = Transform;
-        instance.FacingLeft = _facingLeft;
+        instance.Velocity = (_facingLeft ? Vector2.Left : Vector2.Right) * ShotSpeed;
         AddSibling(instance);
     }
 
