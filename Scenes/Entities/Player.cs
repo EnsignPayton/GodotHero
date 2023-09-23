@@ -8,7 +8,7 @@ public partial class Player : CharacterBody2D
 
     [Export] public int MaximumShots { get; set; } = 5;
     [Export] public int ShotSpeed { get; set; } = 128;
-    [Export] public int MoveSpeed { get; set; } = 128;
+    [Export] public int MoveSpeed { get; set; } = 80;
 
     [Export] public Sprite2D Sprite { get; set; } = default!;
     [Export] public Timer FlameTimer { get; set; } = default!;
