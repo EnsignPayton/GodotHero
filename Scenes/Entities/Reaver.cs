@@ -1,16 +1,17 @@
 namespace GodotHero.Scenes.Entities;
 
-public partial class Drone : CharacterBody2D, IEnemy
+public partial class Reaver : CharacterBody2D, IEnemy
 {
 	private Player _player = default!;
 	private EnemyState _state = EnemyState.Blinking;
 	private Vector2 _direction = Vector2.Zero;
 	private int _currentHealth;
 
-	[Export] public int Speed { get; set; } = 32;
-	[Export] public int MaxHealth { get; set; } = 2;
+	[Export] public int Speed { get; set; } = 64;
+	[Export] public int MaxHealth { get; set; } = 4;
 
-	[Export] public AnimatedSprite2D MainSprite { get; set; } = default!;
+	[Export] public AnimatedSprite2D BlinkSprite { get; set; } = default!;
+	[Export] public Sprite2D MainSprite { get; set; } = default!;
 	[Export] public AnimatedSprite2D DeathSprite { get; set; } = default!;
 	[Export] public Timer BlinkTimer { get; set; } = default!;
 	[Export] public Timer TargetTimer { get; set; } = default!;
@@ -30,13 +31,17 @@ public partial class Drone : CharacterBody2D, IEnemy
 		_state = EnemyState.Chasing;
 		_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
 
-		MainSprite.Stop();
+		BlinkSprite.Stop();
+		BlinkSprite.Visible = false;
+		MainSprite.Visible = true;
 		TargetTimer.Start();
+		FaceDirection();
 	}
 
 	private void TargetTimerOnTimeout()
 	{
 		_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+		FaceDirection();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -47,7 +52,13 @@ public partial class Drone : CharacterBody2D, IEnemy
 		if (collision is not null)
 		{
 			_direction = _direction.Bounce(collision.GetNormal());
+			FaceDirection();
 		}
+	}
+
+	private void FaceDirection()
+	{
+		MainSprite.FlipH = _direction.X > 0;
 	}
 
 	public void Hit()

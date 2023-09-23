@@ -5,7 +5,9 @@ namespace GodotHero.Scenes;
 public partial class Room : Node2D
 {
 	private readonly List<Transform2D> _droneTransforms = new();
+	private readonly List<Transform2D> _reaverTransforms = new();
 	private readonly PackedScene _droneScene = GD.Load<PackedScene>("res://Scenes/Entities/Drone.tscn");
+	private readonly PackedScene _reaverScene = GD.Load<PackedScene>("res://Scenes/Entities/Reaver.tscn");
 	private Camera2D _camera = default!;
 
 	public override void _Ready()
@@ -22,6 +24,11 @@ public partial class Room : Node2D
 		foreach (var node in GetChildren().OfType<Drone>())
 		{
 			_droneTransforms.Add(node.Transform);
+		}
+
+		foreach (var node in GetChildren().OfType<Reaver>())
+		{
+			_reaverTransforms.Add(node.Transform);
 		}
 	}
 
@@ -70,6 +77,11 @@ public partial class Room : Node2D
 		{
 			node.QueueFree();
 		}
+
+		foreach (var node in GetChildren().OfType<Reaver>())
+		{
+			node.QueueFree();
+		}
 	}
 
 	private void InstantiateEnemies()
@@ -77,6 +89,13 @@ public partial class Room : Node2D
 		foreach (var transform in _droneTransforms)
 		{
 			var instance = _droneScene.Instantiate<Drone>();
+			instance.Transform = transform;
+			AddChild(instance);
+		}
+
+		foreach (var transform in _reaverTransforms)
+		{
+			var instance = _reaverScene.Instantiate<Reaver>();
 			instance.Transform = transform;
 			AddChild(instance);
 		}

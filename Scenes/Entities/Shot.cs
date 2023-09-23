@@ -19,9 +19,9 @@ public partial class Shot : Node2D
 			// Hit a wall, destroy
 			QueueFree();
 		}
-		else if (body is Drone d)
+		else if (body is IEnemy enemy)
 		{
-			d.Hit();
+			enemy.Hit();
 			QueueFree();
 		}
 	}

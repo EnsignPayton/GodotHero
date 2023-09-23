@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7g7u8kaxqcna"]
+[gd_scene load_steps=8 format=3 uid="uid://b7g7u8kaxqcna"]
 
 [ext_resource type="Texture2D" uid="uid://65ojjn7ihmpt" path="res://Sprites/spr_block.png" id="1_ral6m"]
 [ext_resource type="PackedScene" uid="uid://ctm6twcbv3xr" path="res://Scenes/Entities/Player.tscn" id="2_or38h"]
 [ext_resource type="PackedScene" uid="uid://cruh3tgw4ccgq" path="res://Scenes/Room.tscn" id="3_gvmt5"]
 [ext_resource type="PackedScene" uid="uid://dtx44e031g4k1" path="res://Scenes/Entities/Drone.tscn" id="4_1y0l1"]
+[ext_resource type="PackedScene" uid="uid://o8qlx84m3d7l" path="res://Scenes/Entities/Reaver.tscn" id="5_dquh8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_djxcq"]
 texture = ExtResource("1_ral6m")
@@ -60,3 +61,6 @@ position = Vector2(96, -75)
 
 [node name="Drone2" parent="Rooms/Room9" instance=ExtResource("4_1y0l1")]
 position = Vector2(6, 100)
+
+[node name="Reaver" parent="Rooms/Room9" instance=ExtResource("5_dquh8")]
+position = Vector2(133, 86)
