@@ -60,6 +60,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "FlameTimer") groups=["Player"]]
+collision_layer = 2
 safe_margin = 0.001
 script = ExtResource("1_w7l47")
 Sprite = NodePath("Sprite2D")

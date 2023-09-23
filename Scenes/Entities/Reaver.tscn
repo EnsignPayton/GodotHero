@@ -80,6 +80,7 @@ animations = [{
 }]
 
 [node name="Reaver" type="CharacterBody2D" node_paths=PackedStringArray("BlinkSprite", "MainSprite", "DeathSprite", "BlinkTimer", "TargetTimer", "CollisionShape")]
+collision_layer = 4
 script = ExtResource("1_8grqg")
 BlinkSprite = NodePath("BlinkSprite")
 MainSprite = NodePath("MainSprite")

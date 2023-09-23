@@ -80,6 +80,7 @@ animations = [{
 }]
 
 [node name="Drone" type="CharacterBody2D" node_paths=PackedStringArray("MainSprite", "DeathSprite", "BlinkTimer", "TargetTimer", "CollisionShape")]
+collision_layer = 4
 script = ExtResource("1_suxty")
 MainSprite = NodePath("MainSprite")
 DeathSprite = NodePath("DeathSprite")
