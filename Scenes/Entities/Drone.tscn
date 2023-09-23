@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dtx44e031g4k1"]
+[gd_scene load_steps=15 format=3 uid="uid://dtx44e031g4k1"]
 
 [ext_resource type="Texture2D" uid="uid://cv4sgt5itjjxx" path="res://Sprites/spr_drone.png" id="1_7r48x"]
 [ext_resource type="Script" path="res://Scenes/Entities/Drone.cs" id="1_suxty"]
@@ -6,6 +6,28 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1sh0"]
 size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mm2p"]
+atlas = ExtResource("1_7r48x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddivy"]
+atlas = ExtResource("1_7r48x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ql21r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mm2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddivy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvi6m"]
 atlas = ExtResource("3_3frqt")
@@ -57,21 +79,29 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Drone" type="CharacterBody2D"]
+[node name="Drone" type="CharacterBody2D" node_paths=PackedStringArray("MainSprite", "DeathSprite", "BlinkTimer", "TargetTimer", "CollisionShape")]
 script = ExtResource("1_suxty")
-Speed = 32
+MainSprite = NodePath("MainSprite")
+DeathSprite = NodePath("DeathSprite")
+BlinkTimer = NodePath("BlinkTimer")
+TargetTimer = NodePath("TargetTimer")
+CollisionShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_e1sh0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_7r48x")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
-
-[node name="Timer" type="Timer" parent="."]
-autostart = true
+[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ql21r")
+autoplay = "default"
+frame_progress = 0.784677
 
 [node name="DeathSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_3w7da")
+
+[node name="BlinkTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="TargetTimer" type="Timer" parent="."]
+wait_time = 1.5

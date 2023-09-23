@@ -1,59 +1,52 @@
-using System;
-
 namespace GodotHero.Scenes.Entities;
 
 public partial class Drone : CharacterBody2D
 {
-	private CollisionShape2D _collisionShape = default!;
-	private Sprite2D _sprite = default!;
-	private AnimatedSprite2D _deathSprite = default!;
 	private Player _player = default!;
 	private DroneState _state = DroneState.Blinking;
 	private Vector2 _direction = Vector2.Zero;
 	private int _currentHealth;
 
-	[Export] public int Speed { get; set; } = 96;
+	[Export] public int Speed { get; set; } = 32;
 	[Export] public int MaxHealth { get; set; } = 2;
+
+	[Export] public AnimatedSprite2D MainSprite { get; set; } = default!;
+	[Export] public AnimatedSprite2D DeathSprite { get; set; } = default!;
+	[Export] public Timer BlinkTimer { get; set; } = default!;
+	[Export] public Timer TargetTimer { get; set; } = default!;
+	[Export] public CollisionShape2D CollisionShape { get; set; } = default!;
 
 	public override void _Ready()
 	{
 		_currentHealth = MaxHealth;
-
-		var timer = GetNode<Timer>("Timer");
-		timer.Timeout += OnTimeout;
-
-		_collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
-		_sprite = GetNode<Sprite2D>("Sprite2D");
-		_deathSprite = GetNode<AnimatedSprite2D>("DeathSprite");
 		_player = (Player)GetTree().GetFirstNodeInGroup("Player");
+
+		BlinkTimer.Timeout += BlinkTimerOnTimeout;
+		TargetTimer.Timeout += TargetTimerOnTimeout;
 	}
 
-	private void OnTimeout()
+	private void BlinkTimerOnTimeout()
 	{
-		if (_state is DroneState.Blinking)
-		{
-			_state = DroneState.Chasing;
-			_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
-		}
-		else if (_state is DroneState.Chasing)
-		{
-			_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
-		}
-		else if (_state is DroneState.Dying)
-		{
-			_direction = Vector2.Zero;
-		}
+		_state = DroneState.Chasing;
+		_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+
+		MainSprite.Stop();
+		TargetTimer.Start();
 	}
 
-	public override void _Process(double delta)
+	private void TargetTimerOnTimeout()
 	{
-		if (_state is not DroneState.Dying)
+		_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		if (_state is not DroneState.Chasing) return;
+
+		var collision = MoveAndCollide((float)delta * Speed * _direction);
+		if (collision is not null)
 		{
-			var collision = MoveAndCollide((float)delta * Speed * _direction);
-			if (collision is not null)
-			{
-				_direction = _direction.Bounce(collision.GetNormal());
-			}
+			_direction = _direction.Bounce(collision.GetNormal());
 		}
 	}
 
@@ -67,11 +60,11 @@ public partial class Drone : CharacterBody2D
 	private void Die()
 	{
 		_state = DroneState.Dying;
-		_collisionShape.SetDeferred("disabled", true);
-		_sprite.Visible = false;
-		_deathSprite.Visible = true;
-		_deathSprite.Play();
-		_deathSprite.AnimationFinished += OnAnimationFinished;
+		CollisionShape.SetDeferred("disabled", true);
+		MainSprite.Visible = false;
+		DeathSprite.Visible = true;
+		DeathSprite.Play();
+		DeathSprite.AnimationFinished += OnAnimationFinished;
 	}
 
 	private void OnAnimationFinished()
