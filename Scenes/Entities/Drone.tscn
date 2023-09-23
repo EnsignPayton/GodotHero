@@ -49,6 +49,7 @@ frame_progress = 0.784677
 [node name="DeathSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = ExtResource("3_s4jhb")
+animation = &"BigExplo"
 
 [node name="BlinkTimer" type="Timer" parent="."]
 one_shot = true

@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyhibgbyddan"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/Crusher.cs" id="1_4swhj"]
+[ext_resource type="Texture2D" uid="uid://fp4xyv5cgn0l" path="res://Sprites/spr_crusher.png" id="1_lhqpw"]
+[ext_resource type="SpriteFrames" uid="uid://q07n0nt0wyjr" path="res://Animations/BigExplo.tres" id="3_kql27"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gyhu"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrpib"]
+atlas = ExtResource("1_lhqpw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk0pq"]
+atlas = ExtResource("1_lhqpw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_weu2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrpib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jk0pq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Crusher" type="CharacterBody2D" node_paths=PackedStringArray("MainSprite", "DeathSprite", "BlinkTimer", "TargetTimer", "CollisionShape")]
+collision_layer = 4
+script = ExtResource("1_4swhj")
+MainSprite = NodePath("MainSprite")
+DeathSprite = NodePath("DeathSprite")
+BlinkTimer = NodePath("BlinkTimer")
+TargetTimer = NodePath("TargetTimer")
+CollisionShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5gyhu")
+
+[node name="MainSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_weu2n")
+autoplay = "default"
+
+[node name="DeathSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = ExtResource("3_kql27")
+animation = &"BigExplo"
+
+[node name="BlinkTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="TargetTimer" type="Timer" parent="."]

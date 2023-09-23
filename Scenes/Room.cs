@@ -6,11 +6,13 @@ public partial class Room : Node2D
 {
     private readonly List<Transform2D> _droneTransforms = new();
     private readonly List<Transform2D> _reaverTransforms = new();
+    private readonly List<Transform2D> _crusherTransforms = new();
 
     [Export] public Camera2D Camera { get; set; } = default!;
     [Export] public Area2D Area { get; set; } = default!;
     [Export] public PackedScene DroneScene { get; set; } = default!;
     [Export] public PackedScene ReaverScene { get; set; } = default!;
+    [Export] public PackedScene CrusherScene { get; set; } = default!;
 
     public override void _Ready()
     {
@@ -21,14 +23,21 @@ public partial class Room : Node2D
 
     private void InitializeEnemies()
     {
-        foreach (var node in GetChildren().OfType<Drone>())
+        var children = GetChildren();
+
+        foreach (var node in children.OfType<Drone>())
         {
             _droneTransforms.Add(node.Transform);
         }
 
-        foreach (var node in GetChildren().OfType<Reaver>())
+        foreach (var node in children.OfType<Reaver>())
         {
             _reaverTransforms.Add(node.Transform);
+        }
+
+        foreach (var node in children.OfType<Crusher>())
+        {
+            _crusherTransforms.Add(node.Transform);
         }
     }
 
@@ -87,6 +96,13 @@ public partial class Room : Node2D
         foreach (var transform in _reaverTransforms)
         {
             var instance = ReaverScene.Instantiate<Reaver>();
+            instance.Transform = transform;
+            AddChild(instance);
+        }
+
+        foreach (var transform in _crusherTransforms)
+        {
+            var instance = CrusherScene.Instantiate<Crusher>();
             instance.Transform = transform;
             AddChild(instance);
         }

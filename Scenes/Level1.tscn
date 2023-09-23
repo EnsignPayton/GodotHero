@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7g7u8kaxqcna"]
+[gd_scene load_steps=11 format=3 uid="uid://b7g7u8kaxqcna"]
 
 [ext_resource type="Texture2D" uid="uid://65ojjn7ihmpt" path="res://Sprites/spr_block.png" id="1_ral6m"]
 [ext_resource type="PackedScene" uid="uid://ctm6twcbv3xr" path="res://Scenes/Entities/Player.tscn" id="2_or38h"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://pu8f1jfne8wb" path="res://Scenes/Entities/Generator.tscn" id="4_8q3lm"]
 [ext_resource type="PackedScene" uid="uid://o8qlx84m3d7l" path="res://Scenes/Entities/Reaver.tscn" id="5_dquh8"]
 [ext_resource type="PackedScene" uid="uid://1dcnaovriu3q" path="res://Scenes/Entities/Barrier.tscn" id="7_3pfyw"]
+[ext_resource type="PackedScene" uid="uid://cyhibgbyddan" path="res://Scenes/Entities/Crusher.tscn" id="8_1l7m0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_djxcq"]
 texture = ExtResource("1_ral6m")
@@ -65,6 +66,9 @@ position = Vector2(16, 28)
 
 [node name="Barrier" parent="Rooms/Room5" instance=ExtResource("7_3pfyw")]
 position = Vector2(-32, 16)
+
+[node name="Crusher" parent="Rooms/Room5" instance=ExtResource("8_1l7m0")]
+position = Vector2(118, -77)
 
 [node name="Room6" parent="Rooms" instance=ExtResource("3_gvmt5")]
 position = Vector2(480, -160)
