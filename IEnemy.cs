@@ -3,4 +3,5 @@
 public interface IEnemy
 {
     void Hit();
+    void QueueFree();
 }

@@ -71,12 +71,7 @@ public partial class Room : Node2D
 
     private void FreeAllEnemies()
     {
-        foreach (var node in GetChildren().OfType<Drone>())
-        {
-            node.QueueFree();
-        }
-
-        foreach (var node in GetChildren().OfType<Reaver>())
+        foreach (var node in GetChildren().OfType<IEnemy>())
         {
             node.QueueFree();
         }
