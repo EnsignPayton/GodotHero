@@ -2,6 +2,9 @@ namespace GodotHero.Scenes.Entities;
 
 public partial class Drone : CharacterBody2D
 {
+	private CollisionShape2D _collisionShape = default!;
+	private Sprite2D _sprite = default!;
+	private AnimatedSprite2D _deathSprite = default!;
 	private Player _player = default!;
 	private DroneState _state = DroneState.Blinking;
 	private Vector2 _direction = Vector2.Zero;
@@ -17,6 +20,9 @@ public partial class Drone : CharacterBody2D
 		var timer = GetNode<Timer>("Timer");
 		timer.Timeout += OnTimeout;
 
+		_collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+		_sprite = GetNode<Sprite2D>("Sprite2D");
+		_deathSprite = GetNode<AnimatedSprite2D>("DeathSprite");
 		_player = GetTree().GetNodesInGroup("Player").OfType<Player>().First();
 	}
 
@@ -31,14 +37,21 @@ public partial class Drone : CharacterBody2D
 		{
 			_direction = (_player.GlobalPosition - GlobalPosition).Normalized();
 		}
+		else if (_state is DroneState.Dying)
+		{
+			_direction = Vector2.Zero;
+		}
 	}
 
 	public override void _Process(double delta)
 	{
-		var collision = MoveAndCollide((float)delta * Speed * _direction);
-		if (collision is not null)
+		if (_state is not DroneState.Dying)
 		{
-			_direction = _direction.Bounce(collision.GetNormal());
+			var collision = MoveAndCollide((float)delta * Speed * _direction);
+			if (collision is not null)
+			{
+				_direction = _direction.Bounce(collision.GetNormal());
+			}
 		}
 	}
 
@@ -46,12 +59,28 @@ public partial class Drone : CharacterBody2D
 	{
 		_currentHealth--;
 		if (_currentHealth < 1)
-			QueueFree();
+			Die();
+	}
+
+	private void Die()
+	{
+		_state = DroneState.Dying;
+		_collisionShape.SetDeferred("disabled", true);
+		_sprite.Visible = false;
+		_deathSprite.Visible = true;
+		_deathSprite.Play();
+		_deathSprite.AnimationFinished += OnAnimationFinished;
+	}
+
+	private void OnAnimationFinished()
+	{
+		QueueFree();
 	}
 
 	private enum DroneState
 	{
 		Blinking,
 		Chasing,
+		Dying,
 	}
 }

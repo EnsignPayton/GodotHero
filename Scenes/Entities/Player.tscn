@@ -1,10 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctm6twcbv3xr"]
+[gd_scene load_steps=12 format=3 uid="uid://ctm6twcbv3xr"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.cs" id="1_w7l47"]
 [ext_resource type="Texture2D" uid="uid://o2a2n7tnx6h7" path="res://Sprites/spr_hero.png" id="2_i4gax"]
+[ext_resource type="Texture2D" uid="uid://bo7v01trn5f7o" path="res://Sprites/spr_bigexplo.png" id="3_3r8m7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef6b0"]
 size = Vector2(12, 15.9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0pys"]
+atlas = ExtResource("3_3r8m7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6ikg"]
+atlas = ExtResource("3_3r8m7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obhvw"]
+atlas = ExtResource("3_3r8m7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmo1v"]
+atlas = ExtResource("3_3r8m7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wohhn"]
+atlas = ExtResource("3_3r8m7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7aqw"]
+atlas = ExtResource("3_3r8m7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ggop7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0pys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6ikg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obhvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmo1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wohhn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7aqw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 safe_margin = 0.001
@@ -21,3 +72,7 @@ region_rect = Rect2(0, 0, 12, 16)
 [node name="FlameTimer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_ggop7")
