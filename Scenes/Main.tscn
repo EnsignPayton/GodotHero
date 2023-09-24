@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://beqfobiajwtlo"]
+[gd_scene load_steps=6 format=3 uid="uid://beqfobiajwtlo"]
 
 [ext_resource type="Script" path="res://Scenes/Main.cs" id="1_g4gxr"]
 [ext_resource type="PackedScene" uid="uid://eiajfxtakcix" path="res://Scenes/World.tscn" id="1_s3tf7"]
 [ext_resource type="PackedScene" uid="uid://b7g7u8kaxqcna" path="res://Scenes/Level1.tscn" id="2_3cmsj"]
 [ext_resource type="PackedScene" uid="uid://cd7s4kvqmfmoj" path="res://Scenes/GUI.tscn" id="3_08o77"]
+[ext_resource type="AudioStream" uid="uid://dlqa5tvcfs3dq" path="res://Music/title.ogg" id="5_xwdjf"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("FPSTimer")]
 script = ExtResource("1_g4gxr")
@@ -17,3 +18,7 @@ FPSTimer = NodePath("FPSTimer")
 
 [node name="FPSTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xwdjf")
+autoplay = true
